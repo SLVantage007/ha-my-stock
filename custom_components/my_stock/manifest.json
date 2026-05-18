@@ -1,0 +1,12 @@
+{
+  "domain": "my_stock",
+  "name": "My Stock",
+  "codeowners": ["@SLVantage007"],
+  "config_flow": true,
+  "dependencies": ["http"],
+  "documentation": "https://github.com/SLVantage007/ha-my-stock",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/SLVantage007/ha-my-stock/issues",
+  "requirements": [],
+  "version": "0.0.0"
+}
