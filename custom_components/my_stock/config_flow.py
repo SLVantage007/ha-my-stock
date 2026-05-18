@@ -2,7 +2,7 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
 
-from .const import DOMAIN, CONF_SYMBOL, CONF_NAME, CONF_AVGCOST, CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL
+from .const import DOMAIN, CONF_SYMBOL, CONF_NAME, CONF_AVGCOST, CONF_QTY, CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL
 
 
 class EasyStockConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -27,6 +27,7 @@ class EasyStockConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     CONF_SYMBOL: symbol,
                     CONF_NAME: user_input.get(CONF_NAME, ""),
                     CONF_AVGCOST: user_input.get(CONF_AVGCOST, 0),
+                    CONF_QTY: user_input.get(CONF_QTY, 0),
                     CONF_SCAN_INTERVAL: user_input.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL),
                 },
             )
@@ -35,7 +36,8 @@ class EasyStockConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             {
                 vol.Required(CONF_SYMBOL): str,
                 vol.Optional(CONF_NAME, default=""): str,
-                vol.Optional(CONF_AVGCOST, default=0): int),
+                vol.Optional(CONF_AVGCOST, default=0): int,
+                vol.Optional(CONF_QTY, default=0): int,
                 vol.Optional(CONF_SCAN_INTERVAL, default=DEFAULT_SCAN_INTERVAL): vol.All(
                     int, vol.Range(min=60, max=86400)
                 ),
@@ -60,6 +62,9 @@ class EasyStockOptionsFlow(config_entries.OptionsFlow):
         current_avgcost = self._config_entry.options.get(
             CONF_AVGCOST, self._config_entry.data.get(CONF_AVGCOST, 0)
         )
+        current_qty = self._config_entry.options.get(
+            CONF_QTY, self._config_entry.data.get(CONF_QTY, 0)
+        )
         current_interval = self._config_entry.options.get(
             CONF_SCAN_INTERVAL, self._config_entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
         )
@@ -68,6 +73,7 @@ class EasyStockOptionsFlow(config_entries.OptionsFlow):
             {
                 vol.Optional(CONF_NAME, default=current_name): str,
                 vol.Optional(CONF_AVGCOST, default=current_avgcost): int,
+                vol.Optional(CONF_QTY, default=0): int,
                 vol.Optional(CONF_SCAN_INTERVAL, default=current_interval): vol.All(
                     int, vol.Range(min=60, max=86400)
                 ),
