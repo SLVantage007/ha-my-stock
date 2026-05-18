@@ -5,8 +5,8 @@ from unittest.mock import patch
 import pytest
 from homeassistant.helpers.update_coordinator import UpdateFailed
 
-from custom_components.easy_stock.coordinator import StockDataCoordinator
-from custom_components.easy_stock.const import YAHOO_CHART_URL, YAHOO_CHART_URL_MINI
+from custom_components.my_stock.coordinator import StockDataCoordinator
+from custom_components.my_stock.const import YAHOO_CHART_URL, YAHOO_CHART_URL_MINI
 
 from .conftest import SYMBOL, SAMPLE_DAYS, make_yahoo_payload, make_store, mock_http
 

@@ -1,4 +1,4 @@
-"""Shared fixtures for easy_stock tests."""
+"""Shared fixtures for my_stock tests."""
 from datetime import datetime, timezone
 from unittest.mock import AsyncMock, MagicMock, patch
 

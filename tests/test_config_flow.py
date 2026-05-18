@@ -5,10 +5,12 @@ import pytest
 from homeassistant import config_entries
 from homeassistant.data_entry_flow import FlowResultType
 
-from custom_components.easy_stock.const import (
+from custom_components.my_stock.const import (
     DOMAIN,
     CONF_SYMBOL,
     CONF_NAME,
+    CONF_AVGCOST,
+    CONF_QTY,
     CONF_SCAN_INTERVAL,
     DEFAULT_SCAN_INTERVAL,
 )
@@ -16,8 +18,8 @@ from custom_components.easy_stock.const import (
 
 # Patch out the actual HA setup so no coordinator/network calls are made
 _SETUP_PATCHES = (
-    patch("custom_components.easy_stock.async_setup", return_value=True),
-    patch("custom_components.easy_stock.async_setup_entry", return_value=True),
+    patch("custom_components.my_stock.async_setup", return_value=True),
+    patch("custom_components.my_stock.async_setup_entry", return_value=True),
 )
 
 
