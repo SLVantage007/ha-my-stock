@@ -73,7 +73,7 @@ class EasyStockOptionsFlow(config_entries.OptionsFlow):
             {
                 vol.Optional(CONF_NAME, default=current_name): str,
                 vol.Optional(CONF_AVGCOST, default=current_avgcost): float,
-                vol.Optional(CONF_QTY, default=0): int,
+                vol.Optional(CONF_QTY, default=current_qty): int,
                 vol.Optional(CONF_SCAN_INTERVAL, default=current_interval): vol.All(
                     int, vol.Range(min=60, max=86400)
                 ),

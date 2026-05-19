@@ -8,7 +8,7 @@
           "symbol": "Symbol",
           "name": "Display name (optional)",
           "avgcost": "Average cost (optional)",
-          "qty": "Quantity owned (optional)",
+          "stockqty": "Quantity owned (optional)",
           "scan_interval": "Update interval (seconds)"
         }
       }

@@ -6,6 +6,10 @@ Track your stock portfolio powered by Yahoo Finance.
 
 **No API key required. Fully configured through the UI — no YAML needed.**
 
+Prerequisite:
+- Yahoo Finance installed and configured
+
+
 
 | Field | Description |
 |---|---|
