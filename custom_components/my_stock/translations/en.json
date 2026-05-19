@@ -16,5 +16,19 @@
     "abort": {
       "already_configured": "This symbol is already configured."
     }
-  }
+  },
+  "options": {
+    "step": {
+        "init": {
+            "title": "My Stock",
+            "description": "Edit stock configuration",
+            "data": {
+              "symbol": "Symbol",
+              "name": "Display name (optional)",
+              "avgcost": "Average cost (optional)",
+              "qty": "Quantity owned (optional)",
+              "scan_interval": "Update interval (seconds)"
+            }
+        }
+    }
 }
