@@ -1,6 +1,6 @@
 {
   "domain": "my_stock",
-  "name": "My Stock",
+  "name": "My Stock Portfolio",
   "codeowners": ["@SLVantage007"],
   "config_flow": true,
   "dependencies": ["http"],

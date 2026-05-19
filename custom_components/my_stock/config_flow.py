@@ -36,7 +36,7 @@ class EasyStockConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             {
                 vol.Required(CONF_SYMBOL): str,
                 vol.Optional(CONF_NAME, default=""): str,
-                vol.Optional(CONF_AVGCOST, default=0): int,
+                vol.Optional(CONF_AVGCOST, default=0): float,
                 vol.Optional(CONF_QTY, default=0): int,
                 vol.Optional(CONF_SCAN_INTERVAL, default=DEFAULT_SCAN_INTERVAL): vol.All(
                     int, vol.Range(min=60, max=86400)
@@ -72,7 +72,7 @@ class EasyStockOptionsFlow(config_entries.OptionsFlow):
         schema = vol.Schema(
             {
                 vol.Optional(CONF_NAME, default=current_name): str,
-                vol.Optional(CONF_AVGCOST, default=current_avgcost): int,
+                vol.Optional(CONF_AVGCOST, default=current_avgcost): float,
                 vol.Optional(CONF_QTY, default=0): int,
                 vol.Optional(CONF_SCAN_INTERVAL, default=current_interval): vol.All(
                     int, vol.Range(min=60, max=86400)

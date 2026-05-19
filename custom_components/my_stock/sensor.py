@@ -4,7 +4,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, CONF_SYMBOL, CONF_NAME
+from .const import DOMAIN, CONF_SYMBOL, CONF_NAME, CONF_AVGCOST, CONF_QTY
 from .coordinator import StockDataCoordinator
 
 
