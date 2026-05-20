@@ -19,7 +19,7 @@
   },
   "options": {
     "step": {
-      "user": {
+      "init": {
         "title": "Mon Stock",
         "description": "Modifier la configuration du stock ",
         "data": {
