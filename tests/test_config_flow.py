@@ -1,4 +1,4 @@
-"""Unit tests for EasyStockConfigFlow and EasyStockOptionsFlow."""
+"""Unit tests for MyStockConfigFlow and MyStockOptionsFlow."""
 from unittest.mock import patch
 
 import pytest
