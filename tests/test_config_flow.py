@@ -66,7 +66,7 @@ async def test_symbol_normalized_to_uppercase(hass):
     with _SETUP_PATCHES[0], _SETUP_PATCHES[1]:
         result = await hass.config_entries.flow.async_configure(
             result["flow_id"],
-            {CONF_SYMBOL: "aapl", CONF_NAME: "", CONF_AVGCOST: 200, CONF_QTY: 10,  CONF_SCAN_INTERVAL: DEFAULT_SCAN_INTERVAL},
+            {CONF_SYMBOL: "aapl", CONF_NAME: "", CONF_AVGCOST: 200, CONF_QTY: 10, CONF_SCAN_INTERVAL: DEFAULT_SCAN_INTERVAL},
         )
 
     assert result["data"][CONF_SYMBOL] == "AAPL"
@@ -80,7 +80,7 @@ async def test_duplicate_symbol_aborts(hass):
         with _SETUP_PATCHES[0], _SETUP_PATCHES[1]:
             result = await hass.config_entries.flow.async_configure(
                 result["flow_id"],
-                {CONF_SYMBOL: "TSLA", CONF_NAME: "", CONF_SCAN_INTERVAL: DEFAULT_SCAN_INTERVAL},
+                {CONF_SYMBOL: "TSLA", CONF_NAME: "", CONF_AVGCOST: 200, CONF_QTY: 10, CONF_SCAN_INTERVAL: DEFAULT_SCAN_INTERVAL},
             )
 
     assert result["type"] == FlowResultType.ABORT
