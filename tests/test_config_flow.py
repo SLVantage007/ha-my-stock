@@ -48,12 +48,14 @@ async def test_config_flow_creates_entry(hass):
     with _SETUP_PATCHES[0], _SETUP_PATCHES[1]:
         result = await hass.config_entries.flow.async_configure(
             result["flow_id"],
-            {CONF_SYMBOL: "AAPL", CONF_NAME: "Apple", CONF_SCAN_INTERVAL: 900},
+            {CONF_SYMBOL: "AAPL", CONF_NAME: "Apple", CONF_AVGCOST: 0, CONF_QTY: 0, CONF_SCAN_INTERVAL: 900},
         )
 
     assert result["type"] == FlowResultType.CREATE_ENTRY
     assert result["data"][CONF_SYMBOL] == "AAPL"
     assert result["data"][CONF_NAME] == "Apple"
+    assert result["data"][CONF_AVGCOST] == 0
+    assert result["data"][CONF_QTY] == 0
     assert result["data"][CONF_SCAN_INTERVAL] == 900
 
 
@@ -64,11 +66,12 @@ async def test_symbol_normalized_to_uppercase(hass):
     with _SETUP_PATCHES[0], _SETUP_PATCHES[1]:
         result = await hass.config_entries.flow.async_configure(
             result["flow_id"],
-            {CONF_SYMBOL: "aapl", CONF_NAME: "", CONF_SCAN_INTERVAL: DEFAULT_SCAN_INTERVAL},
+            {CONF_SYMBOL: "aapl", CONF_NAME: "", CONF_AVGCOST: 200, CONF_QTY: 10,  CONF_SCAN_INTERVAL: DEFAULT_SCAN_INTERVAL},
         )
 
     assert result["data"][CONF_SYMBOL] == "AAPL"
-
+    assert result["data"][CONF_AVGCOST] == 200
+    assert result["data"][CONF_QTY] == 10
 
 async def test_duplicate_symbol_aborts(hass):
     """Configuring the same symbol twice triggers an abort."""
@@ -95,7 +98,7 @@ async def test_options_flow_shows_form(hass):
 
     entry = MockConfigEntry(
         domain=DOMAIN,
-        data={CONF_SYMBOL: "MSFT", CONF_NAME: "Microsoft", CONF_SCAN_INTERVAL: 900},
+        data={CONF_SYMBOL: "MSFT", CONF_NAME: "Microsoft", CONF_AVGCOST: 0, CONF_QTY: 0, CONF_SCAN_INTERVAL: 900},
         options={},
     )
     entry.add_to_hass(hass)
@@ -111,7 +114,7 @@ async def test_options_flow_saves_new_values(hass):
 
     entry = MockConfigEntry(
         domain=DOMAIN,
-        data={CONF_SYMBOL: "MSFT", CONF_NAME: "Microsoft", CONF_SCAN_INTERVAL: 900},
+        data={CONF_SYMBOL: "MSFT", CONF_NAME: "Microsoft", CONF_AVGCOST: 0, CONF_QTY: 0, CONF_SCAN_INTERVAL: 900},
         options={},
     )
     entry.add_to_hass(hass)
