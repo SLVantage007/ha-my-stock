@@ -17,7 +17,7 @@ from .conftest import SYMBOL, SAMPLE_DAYS, make_yahoo_payload, make_store, mock_
 
 
 def _coord(hass, history=None):
-    return StockDataCoordinator(hass, SYMBOL, 900, make_store(history))
+    return StockDataCoordinator(hass, SYMBOL, 900, 100, 10, make_store(history))
 
 
 # ---------------------------------------------------------------------------
