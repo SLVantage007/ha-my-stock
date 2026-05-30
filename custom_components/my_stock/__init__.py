@@ -7,7 +7,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.storage import Store
 
-from .const import DOMAIN, CONF_SYMBOL, CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL
+from .const import DOMAIN, CONF_SYMBOL, CONF_SCAN_INTERVAL, CONF_AVGCOST, CONF_QTY, DEFAULT_SCAN_INTERVAL
 from .coordinator import StockDataCoordinator
 
 PLATFORMS = ["sensor"]
@@ -58,11 +58,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     scan_interval = entry.options.get(
         CONF_SCAN_INTERVAL, entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
     )
+    avgcost = entry.data[CONF_AVGCOST]
+    qty = entry.data[CONF_QTY]
     store = Store(hass, version=1, key=f"my_stock.{symbol.lower()}.history")
     coordinator = StockDataCoordinator(
         hass,
         symbol=symbol,
         update_interval=scan_interval,
+        avgcost=avgcost,
+        qty=qty,
         store=store,
     )
     await coordinator.async_config_entry_first_refresh()

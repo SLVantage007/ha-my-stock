@@ -19,7 +19,7 @@ _HEADERS = {
 
 
 class StockDataCoordinator(DataUpdateCoordinator):
-    def __init__(self, hass, symbol: str, update_interval: int, store: Store) -> None:
+    def __init__(self, hass, symbol: str, update_interval: int, avgcost: float, qty: float, store: Store) -> None:
         super().__init__(
             hass,
             _LOGGER,
@@ -27,6 +27,8 @@ class StockDataCoordinator(DataUpdateCoordinator):
             update_interval=timedelta(seconds=update_interval),
         )
         self.symbol = symbol
+        self.avgcost = avgcost
+        self.qty = qty
         self._store = store
         # None = not yet loaded from store (populated on first _async_update_data call)
         self._history: list | None = None
@@ -128,6 +130,9 @@ class StockDataCoordinator(DataUpdateCoordinator):
             change = current_price - previous_close
             change_pct = (change / previous_close * 100) if previous_close else 0
 
+            gain = (current_price - self.avgcost) * self.qty
+            gain_pct = (current_price / self.avgcost * 100) if self.avgcost else 0
+
             return {
                 "symbol": self.symbol,
                 "long_name": meta.get("longName") or meta.get("shortName") or self.symbol,
@@ -135,6 +140,8 @@ class StockDataCoordinator(DataUpdateCoordinator):
                 "market_state": meta.get("marketState", "CLOSED"),
                 "current_price": round(current_price, 4),
                 "previous_close": round(previous_close, 4),
+                "gain": round(gain, 4),
+                "gain_pct": round(gain_pct, 2),
                 "change": round(change, 4),
                 "change_pct": round(change_pct, 2),
                 "price_is_live": price_is_live,

@@ -114,7 +114,7 @@ async def test_options_flow_saves_new_values(hass):
 
     entry = MockConfigEntry(
         domain=DOMAIN,
-        data={CONF_SYMBOL: "MSFT", CONF_NAME: "Microsoft", CONF_AVGCOST: 0, CONF_QTY: 0, CONF_SCAN_INTERVAL: 900},
+        data={CONF_SYMBOL: "MSFT", CONF_NAME: "Microsoft", CONF_AVGCOST: 0.0, CONF_QTY: 0, CONF_SCAN_INTERVAL: 900},
         options={},
     )
     entry.add_to_hass(hass)

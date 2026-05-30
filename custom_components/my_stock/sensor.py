@@ -24,6 +24,8 @@ class StockSensor(CoordinatorEntity, SensorEntity):
         self._entry = entry
         self._attr_unique_id = f"my_stock_{entry.data[CONF_SYMBOL]}"
         name = entry.options.get(CONF_NAME) or entry.data.get(CONF_NAME) or entry.title or entry.data[CONF_SYMBOL]
+        self._avgcost = entry.data[CONF_AVGCOST]
+        self._qty = entry.data[CONF_QTY]
         self._attr_name = name.strip()
 
     @property
@@ -44,6 +46,8 @@ class StockSensor(CoordinatorEntity, SensorEntity):
             "long_name": d["long_name"],
             "currency": d["currency"],
             "market_state": d["market_state"],
+            "gain": d["gain"],
+            "gain_pct": d["gain_pct"],
             "change": d["change"],
             "change_pct": d["change_pct"],
             "previous_close": d["previous_close"],
