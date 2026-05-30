@@ -96,7 +96,7 @@ async def test_parses_response_fields(hass):
 async def test_backfill_populates_history(hass):
     """First fetch stores history (capped at 365 entries)."""
     store = make_store(history=None)
-    coord = StockDataCoordinator(hass, SYMBOL, 900, store)
+    coord = StockDataCoordinator(hass, SYMBOL, 900, 100, 10, store)
     patcher, _ = mock_http(make_yahoo_payload())
 
     with patcher:
@@ -111,7 +111,7 @@ async def test_new_day_appended_to_history(hass):
     """Mini fetch appends a new trading day that isn't in history yet."""
     history = [[d, p] for d, p in SAMPLE_DAYS[:-1]]  # missing last day
     store = make_store(history=history)
-    coord = StockDataCoordinator(hass, SYMBOL, 900, store)
+    coord = StockDataCoordinator(hass, SYMBOL, 900, 100, 10, store)
 
     # Mini fetch returns only the last two days
     payload = make_yahoo_payload(days_prices=SAMPLE_DAYS[-2:])
@@ -128,7 +128,7 @@ async def test_no_duplicate_appended_when_date_unchanged(hass):
     """Mini fetch with no new date leaves history unchanged."""
     history = [[d, p] for d, p in SAMPLE_DAYS]
     store = make_store(history=history)
-    coord = StockDataCoordinator(hass, SYMBOL, 900, store)
+    coord = StockDataCoordinator(hass, SYMBOL, 900, 100, 10, store)
 
     # All fetched dates already in history
     patcher, _ = mock_http(make_yahoo_payload())
